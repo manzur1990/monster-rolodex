@@ -1,26 +1,23 @@
 import React, { Component } from 'react'
+import { CardList } from './components/card-list/card-list.components'
+
 
 
 export default class App extends Component {
   state = {
-    mosnters: [
-      {
-        name: 'Frankenstien'
-       },
-       {
-         name: 'Dracula'
-        },
-        {
-         name: 'El Cadejo'
-        },
-    ]
-   }
+    monsters: []
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(users => this.setState({ monsters: users }))
+  }
 
   render() {
     return (
       <div className='App'>
-        <header className='App-header'></header>
-        <img src="" alt="logo" className="App-logo"/>
+      <CardList monsters={this.state.monsters} /> 
       </div>
     )
   }
